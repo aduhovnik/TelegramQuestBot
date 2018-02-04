@@ -1,9 +1,7 @@
-#!/usr/bin/env python
-
-
 import telegram
 from flask import Flask, request
 
+from commands_handler.commands_handler import Commands_Handler
 from config import BOT_TOKEN, PORT, HOST
 from models.db_settings import db_session
 
@@ -19,7 +17,7 @@ def teardown_request(exception=None):
 def bot_handler(bot_token):
     bot = telegram.Bot(bot_token)
     update = telegram.update.Update.de_json(request.get_json(force=True), bot=bot)
-    # Commands_Handler(update, bot).process_update(update)
+    Commands_Handler(update, bot).process_update(update)
 
     return 'OK'
 
