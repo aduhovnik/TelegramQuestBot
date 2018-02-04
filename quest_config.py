@@ -21,4 +21,4 @@ finish_question = Question(
 
 info_str = "This is quest bot"
 
-help_str = "Help string"
+help_str = "You can get help only after 5 unsuccessful tries."
