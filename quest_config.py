@@ -2,9 +2,13 @@ from quest.question import Question, QuestionUnit, AnswerUnit, HelpUnit
 
 questions = [
     Question(
-        question_unit=QuestionUnit(type='text', question="10+10"),
+        question_unit=QuestionUnit(type='text',
+                                   question="10+10",
+                                   correct_message="Nice! Let's go to the next question.",
+                                   wrong_message="Oh, common, try again!"),
         answer_unit=AnswerUnit(type='text', answer="20"),
-        help_unit=HelpUnit(type='text', help="Oh, common, this is so easy.")
+        help_unit=HelpUnit(type='text',
+                           help="Oh, common, this is so easy.")
     ),
 ]
 
