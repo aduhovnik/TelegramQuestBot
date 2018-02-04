@@ -3,6 +3,9 @@ from models.models import TlgMessage, TlgUser, TlgChat
 
 class TrackMixin:
     def get_user_id(self, _user):
+        if not _user:
+            return None
+
         user = TlgUser.get_by_criteria(id=_user['id'])
         if not user:
             user_dict = {
@@ -17,6 +20,9 @@ class TrackMixin:
         return user.id
 
     def get_chat_id(self, _chat):
+        if not _chat:
+            return None
+
         chat = TlgChat.get_by_criteria(id=_chat['id'])
         if not chat:
             chat_dict = {
@@ -38,8 +44,8 @@ class TrackMixin:
             'from_user_id': self.get_user_id(message['from_user']),
             'date': message['date'],
             'chat_id': self.get_chat_id(message['chat']),
-            'forward_from': message['forward_from'],
-            'forward_from_chat_id': message['forward_from_chat'],
+            'forward_from_id': self.get_user_id(message['forward_from']),
+            'forward_from_chat_id': self.get_chat_id(message['forward_from_chat']),
             'reply_to_message_id': message['reply_to_message_id'],
             'forward_date': message['forward_date'],
             'text': message['text'],
