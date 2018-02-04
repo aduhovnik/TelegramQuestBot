@@ -4,6 +4,7 @@ DEFAULT_WRONG_MESSAGE = "It's wrong"
 DEFAULT_HELP_MESSAGE = "Never give up!"
 
 TEXT_TYPE = 'text'
+ONE_FROM_LIST_TYPE = 'one_from_list'
 
 
 class Question:
@@ -14,16 +15,13 @@ class Question:
         self.finished = finished
 
     def get_question(self):
-        if self.question.type == TEXT_TYPE:
-            return self.question.q_string
-        else:
-            raise ValueError
+        return self.question.get_question()
 
     def check_ans(self, answer):
-        if self.answer.ans_string == answer:
-            return True, self.question.correct_message
-        else:
-            return False, self.question.wrong_message
+        ret = self.answer.check_ans(answer)
+        message = self.question.correct_message if ret \
+            else self.question.wrong_message
+        return ret, message
 
     def get_help(self):
         return self.help.help_string
@@ -40,13 +38,38 @@ class QuestionUnit:
         else:
             raise ValueError
 
+    def get_question(self):
+        if self.type == TEXT_TYPE:
+            return self.q_string
+        else:
+            raise ValueError
+
 
 class AnswerUnit:
     def __init__(self, type, **kwargs):
         self.type = type
         self.ans_string = None
+        self.ans_set = ()
         if type == TEXT_TYPE:
             self.ans_string = kwargs['answer']
+        elif type == ONE_FROM_LIST_TYPE:
+            self.ans_set = kwargs['answers']
+        else:
+            raise ValueError
+
+    def check_ans(self, answer):
+        if self.type == 'text':
+            if self.ans_string == answer:
+                return True
+            else:
+                return False
+
+        elif self.type == ONE_FROM_LIST_TYPE:
+            if answer in self.ans_string:
+                return True
+            else:
+                return False
+
         else:
             raise ValueError
 
