@@ -5,10 +5,10 @@ Revises:
 Create Date: 2018-01-13 23:53:31.915161
 
 """
-from alembic import op
-import sqlalchemy as sa
 import datetime
 
+import sqlalchemy as sa
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = '0374c3753086'
@@ -71,7 +71,8 @@ def upgrade():
 
     op.create_table(
         'questions_progress',
-        sa.Column('chat_id', sa.Integer, sa.ForeignKey("tlg_chats.id"), primary_key=True),
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('chat_id', sa.Integer, sa.ForeignKey("tlg_chats.id")),
         sa.Column('question_number', sa.Integer),
         sa.Column('passed', sa.Boolean),
         sa.Column('tries', sa.Integer),

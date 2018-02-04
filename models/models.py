@@ -34,10 +34,11 @@ class TlgChat(Base):
     creation_date = Column(DateTime)
 
 
-class QuestionsProgres(TlgChat):
+class QuestionsProgres(Base):
     __tablename__ = 'questions_progress'
 
-    chat_id = Column(ForeignKey('tlg_chats.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    chat_id = Column(ForeignKey('tlg_chats.id'))
     question_number = Column(Integer)
     passed = Column(Integer)
     tries = Column(Integer)

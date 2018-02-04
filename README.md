@@ -11,5 +11,7 @@ You should create the following commands in the FatherBot:
 
 /start_new --- start game from the beginning for current chat
 
+/help --- get help for current question
+
 
 Then configure questions.py file following the example.
