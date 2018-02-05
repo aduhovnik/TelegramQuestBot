@@ -53,19 +53,19 @@ class AnswerUnit:
         if type == TEXT_TYPE:
             self.ans_string = kwargs['answer']
         elif type == ONE_FROM_LIST_TYPE:
-            self.ans_set = kwargs['answers']
+            self.ans_set = map(str.lower, kwargs['answers'])
         else:
             raise ValueError
 
     def check_ans(self, answer):
         if self.type == 'text':
-            if self.ans_string == answer:
+            if self.ans_string.lower() == answer.lower():
                 return True
             else:
                 return False
 
         elif self.type == ONE_FROM_LIST_TYPE:
-            if answer in self.ans_string:
+            if answer.lower() in self.ans_string:
                 return True
             else:
                 return False
