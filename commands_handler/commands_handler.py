@@ -13,6 +13,7 @@ class Commands_Handler(TrackMixin):
             '/guess': self._quest_guess,
             '/start_new': self._quest_restart,
             '/help': self._quest_help,
+            '/q': self._quest_guess
         }
 
     def process_update(self, update):
