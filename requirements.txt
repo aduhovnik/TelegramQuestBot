@@ -1,4 +1,5 @@
 alembic==0.9.7
+arrow==0.12.1
 awscli==1.14.30
 botocore==1.8.34
 certifi==2018.1.18

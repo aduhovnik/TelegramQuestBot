@@ -4,11 +4,9 @@ from flask import Flask, request
 from commands_handler.commands_handler import Commands_Handler
 from config import BOT_TOKEN, PORT, HOST
 from models.db_settings import db_session
-from quest.quest import Quest
-from quest_config import questions, info_str, help_str, finish_question
+from quest_config import quest
 
 app = Flask(__name__)
-quest = Quest(questions, info_str, help_str, finish_question)
 
 
 @app.teardown_request

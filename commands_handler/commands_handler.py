@@ -19,7 +19,9 @@ class Commands_Handler(TrackMixin):
     def process_update(self, update):
         self.track_message(update.message)
         command, args = self._get_command(update)
-        self.process_command(command, args)
+
+        if self._quest_check_start():
+            self.process_command(command, args)
 
     def process_command(self, command, args):
         self.commands_handler.get(command, self._default_handler)(args)
@@ -58,3 +60,9 @@ class Commands_Handler(TrackMixin):
 
     def _default_handler(self, args):
         self.bot.sendMessage(chat_id=self.update.message.chat_id, text='< 3')
+
+    def _quest_check_start(self):
+        ret, message = self.quest.is_started()
+        if not ret:
+            self.bot.sendMessage(chat_id=self.update.message.chat_id, text=message)
+        return ret

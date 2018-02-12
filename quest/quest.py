@@ -1,3 +1,4 @@
+import arrow
 from sqlalchemy import desc
 
 from models.db_settings import db_session
@@ -7,12 +8,15 @@ TRIES_BEFORE_HELP = 5
 
 
 class Quest:
-    def __init__(self, _questions, info_str, help_str, finish_question):
+    def __init__(self, _questions, info_str, help_str, final_question,
+                 start_datetime, waiting_message):
         self.questions = _questions
         self.info_str = info_str
         self.default_help = help_str
+        self.start_datetime = start_datetime
+        self.waiting_message = waiting_message
 
-        self.finish_question = finish_question
+        self.finish_question = final_question
 
     def try_guess(self, chat_id, answer):
         _question = self._get_current_question(chat_id)
@@ -61,3 +65,17 @@ class Quest:
         if not question:
             question = QuestionsProgres(question_number=0, passed=False, tries=0, chat_id=chat_id).save()
         return question
+
+    def _get_waiting_message(self, timedelta):
+        secs = timedelta.total_seconds()
+        hours = int(secs // 3600)
+        secs -= hours * 3600
+        minutes = int(secs // 60)
+        return self.waiting_message % (hours, minutes)
+
+    def is_started(self):
+        _now = arrow.utcnow()
+        if _now < self.start_datetime:
+            message = self._get_waiting_message(self.start_datetime - _now)
+            return False, message
+        return True, ''
