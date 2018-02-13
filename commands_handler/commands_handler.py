@@ -24,7 +24,7 @@ class Commands_Handler(TrackMixin):
             self.process_command(command, args)
 
     def process_command(self, command, args):
-        self.commands_handler.get(command, self._default_handler)(args)
+        self.commands_handler.get(command, self._quest_guess)(args + [command])
 
     def _get_command(self, update):
         try:

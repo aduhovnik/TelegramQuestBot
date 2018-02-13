@@ -53,7 +53,7 @@ class AnswerUnit:
         if type == TEXT_TYPE:
             self.ans_string = kwargs['answer']
         elif type == ONE_FROM_LIST_TYPE:
-            self.ans_set = map(str.lower, kwargs['answers'])
+            self.ans_set = list(map(str.lower, kwargs['answers']))
         else:
             raise ValueError
 
@@ -65,7 +65,7 @@ class AnswerUnit:
                 return False
 
         elif self.type == ONE_FROM_LIST_TYPE:
-            if answer.lower() in self.ans_string:
+            if answer.lower() in self.ans_set:
                 return True
             else:
                 return False
