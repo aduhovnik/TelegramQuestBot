@@ -1,12 +1,13 @@
 # TelegramQuestBot
 Simple telegram quest-bot with declarative way of creating questions
 
-### How to run:
+### How to run for local development:
 0. install PyCharm (optional)
 1. create virtual env for python3: https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html?gclid=CjwKCAjwq832BRA5EiwACvCWsfFFf4IHs2UYAZaJiXpCIreHc_4vOejeeV465eZ071el5FbjcAlCfxoC6FoQAvD_BwE
 2. install postgress db
 3. create in postgress db with name: tlg_bot_db
 4. clone this repo
+4.1 install requirements in created virtual env: pip3 install -r requirements.txt
 5. run initial migrations - be in root of this repo: export PYTHONPATH=. && alembic upgrade head
 6. create your own telegram bot in Bot Father: https://telegram.me/BotFather
 7. paste your telegram bot token into config.py variable BOT_TOKEN
