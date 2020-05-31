@@ -79,11 +79,6 @@ def upgrade():
         sa.Column('creation_date', sa.DateTime, default=datetime.datetime.utcnow),
     )
 
-    conn = op.get_bind()
-    tables = conn.execute("SHOW TABLES")
-    for t in tables:
-        conn.execute(sa.sql.text('ALTER table %s CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci' % t[0]))
-
 
 def downgrade():
     pass
