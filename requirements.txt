@@ -27,7 +27,7 @@ python-editor==1.0.3
 python-telegram-bot==12.7
 PyYAML==4.2b1
 requests==2.20.0
-rsa==3.4.2
+rsa==4.1
 s3transfer==0.1.12
 six==1.11.0
 sqlacodegen==1.1.6
